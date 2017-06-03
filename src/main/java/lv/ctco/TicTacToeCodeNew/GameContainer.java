@@ -17,9 +17,9 @@ public class GameContainer{
     private Bot bot;
     private String textarea;
     private String persistenceUnitName = "playerEntity";
-//    private String dbShutdownString = "jdbc:derby:;shutdown=true";
+    private String dbShutdownString = "jdbc:derby:;shutdown=true";
 //    private String persistenceUnitName = "Entity";
-    private String dbShutdownString = "jdbc:h2:tcp:;";
+//    private String dbShutdownString = "jdbc:h2:tcp:;";
 
     public GameContainer(Buttons[][] buttonArr, JLabel[] labelArray){
         this.buttons = buttonArr;

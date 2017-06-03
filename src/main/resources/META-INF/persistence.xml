@@ -7,8 +7,8 @@
         <class>lv.ctco.TicTacToeCodeNew.dbEntitys.GameEntity</class>
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver" />
-            <property name="javax.persistence.jdbc.url" value="jdbc:derby:C:\Users\tauri_000\Desktop\tictoetest\src\main\resources\db\tttdb;" />
-
+            <!--<property name="javax.persistence.jdbc.url" value="jdbc:derby:C:\Users\tauri_000\Desktop\tictoetest\src\main\resources\db\tttdb;" />-->
+            <property name="javax.persistence.jdbc.url" value="jdbc:derby:.\src\main\resources\db\tttdb;" />
             <!--<property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>-->
             <!--<property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:testDB;DB_CLOSE_DELAY=-1"/>-->
             <!--<property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>-->

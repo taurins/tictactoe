@@ -18,6 +18,7 @@ public class HistoryForm extends JFrame {
         dataSide();
         setup();
         this.add(container);
+
     }
 
     private void setup(){

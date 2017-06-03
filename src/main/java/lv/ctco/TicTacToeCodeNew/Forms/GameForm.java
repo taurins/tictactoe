@@ -9,6 +9,8 @@ import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 public class GameForm extends JFrame {
     private JPanel container = new JPanel(new GridLayout(1,2));
@@ -100,16 +102,55 @@ public class GameForm extends JFrame {
         }
 
         JPanel buttonContainer = new JPanel();
-        JButton history = new JButton("History");
-        history.setText("History");
-        history.addActionListener(new ActionListener() {
+        JButton historyBTN = new JButton("History");
+        historyBTN.setText("History");
+        historyBTN.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 HistoryForm historyform = new HistoryForm();
+                historyform.addWindowListener(new WindowListener() {
+                    @Override
+                    public void windowOpened(WindowEvent e) {
+
+                    }
+
+                    @Override
+                    public void windowClosing(WindowEvent e) {
+
+                    }
+
+                    @Override
+                    public void windowClosed(WindowEvent e) {
+                        GameForm.super.setVisible(true);
+                    }
+
+                    @Override
+                    public void windowIconified(WindowEvent e) {
+
+                    }
+
+                    @Override
+                    public void windowDeiconified(WindowEvent e) {
+
+                    }
+
+                    @Override
+                    public void windowActivated(WindowEvent e) {
+
+                    }
+
+                    @Override
+                    public void windowDeactivated(WindowEvent e) {
+
+                    }
+                });
                 historyform.formSetup();
+                GameForm.super.setVisible(false);
+
             }
         });
-        buttonContainer.add(history);
+        buttonContainer.add(historyBTN);
 
         sideStuff.add(nameContainer);
         sideStuff.add(scoreContainer);
