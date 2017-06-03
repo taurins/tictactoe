@@ -3,6 +3,9 @@ package lv.ctco.TicTacToeCodeNew.Forms;
 import lv.ctco.TicTacToeCodeNew.DBConnection;
 import lv.ctco.TicTacToeCodeNew.HistoryTable;
 import lv.ctco.TicTacToeCodeNew.dbEntitys.GameEntity;
+
+import javax.persistence.Entity;
+import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.swing.*;
 import java.awt.*;
@@ -12,6 +15,7 @@ import java.util.List;
 public class HistoryForm extends JFrame {
     private JPanel container = new JPanel(new GridLayout(1,2));
     private JButton[][] buttonArray = new JButton[3][3];
+    private DBConnection dbConnection = new DBConnection();
 
     public void formSetup(){
         createButtons();
@@ -59,16 +63,8 @@ public class HistoryForm extends JFrame {
     }
 
     private Object[][] getGames(){
-        String persistenceUnitName = "playerEntity";
-        String dbShutdownString = "jdbc:derby:;shutdown=true";
-        DBConnection db = new DBConnection();
-
-        db.connect(persistenceUnitName);
-        Query q = db.getEntityManager().createQuery("select g from GameEntity g");
-
+        Query q = dbConnection.getEntityManager().createQuery("select g from GameEntity g");
         List<GameEntity> gameList = q.getResultList();
-
-
 
         Object[][] games = new Object[gameList.size()][3];
         for (int i = 0; i <gameList.size(); i++) {
@@ -76,8 +72,14 @@ public class HistoryForm extends JFrame {
             games[i][1] = (String) gameList.get(i).getPlayer().getName();
             games[i][2] = (String)gameList.get(i).getPlayerSimbol();
         }
-//        db.disconnect(dbShutdownString);
         return games;
     }
 
+    public DBConnection getDbConnection() {
+        return dbConnection;
+    }
+
+    public void setDbConnection(DBConnection dbConnection) {
+        this.dbConnection = dbConnection;
+    }
 }

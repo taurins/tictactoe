@@ -18,8 +18,7 @@ public class GameContainer{
     private String textarea;
     private String persistenceUnitName = "playerEntity";
     private String dbShutdownString = "jdbc:derby:;shutdown=true";
-//    private String persistenceUnitName = "Entity";
-//    private String dbShutdownString = "jdbc:h2:tcp:;";
+    private DBConnection connection;
 
     public GameContainer(Buttons[][] buttonArr, JLabel[] labelArray){
         this.buttons = buttonArr;
@@ -194,15 +193,10 @@ public class GameContainer{
         bot.addButtons(buttons);
         if(("PC".equals(getPlayerOne())&&turnCounter%2==0)||("Player".equals(getPlayerOne())&&turnCounter%2!=0)) {
             bot.setTurn(true);
-
-            String[] randomArr = {"Random","random","RANDOM"};
-            for (int i = 0; i <randomArr.length; i++) {
-                if(randomArr[i].equals(textarea)){
-                    bot.setRandomMove(true);
-                    break;
-                }else{
-                    bot.setRandomMove(false);
-                }
+            if(textarea.toLowerCase().contains("random")){
+                bot.setRandomMove(true);
+            }else{
+                bot.setRandomMove(false);
             }
 
             bot.go();
@@ -210,13 +204,7 @@ public class GameContainer{
     }
 
     public void dbConnection(){
-        DBConnection db = new DBConnection();
-        db.connect(persistenceUnitName);
-
-        saveToDB(db.getEntityManager());
-
-        db.disconnect(dbShutdownString);
-
+        saveToDB(connection.getEntityManager());
     }
 
     public PlayerEntity getPlayerForSaveGame(EntityManager em){
@@ -295,5 +283,13 @@ public class GameContainer{
 
     public String getPersistenceUnitName() {
         return persistenceUnitName;
+    }
+
+    public DBConnection getConnection() {
+        return connection;
+    }
+
+    public void setConnection(DBConnection connection) {
+        this.connection = connection;
     }
 }

@@ -50,6 +50,7 @@ public class GameContainerTest{
 
         gContainer.setPersistenceUnitName("Entity");
         gContainer.setDbShutdownString("jdbc:h2:tcp:;");
+        gContainer.setTextarea("Test");
     }
 
     @Test
@@ -88,61 +89,6 @@ public class GameContainerTest{
         gContainer.setCallingButton(buttonArray[1][1]);
         assertTrue(gContainer.checkDiagonal());
     }
-
-    //integration test
-//    @Test
-//    public void CheckIfCheckWinWorksAsPlayer() throws Exception {
-//        gContainer.setPlayerOne("Player");
-//        for (int i = 0; i <3; i++) {
-//            buttonArray[i][i].setText("X");
-//        }
-//        gContainer.setCallingButton(buttonArray[1][1]);
-//        gContainer.botTurn();
-//        assertTrue(gContainer.checkWin());
-//    }
-
-    //integration test
-//    @Test
-//    public void CheckIfCheckWinWorksAsPC() throws Exception {
-//        gContainer.botTurn();
-//        gContainer.setPlayerOne("PC");
-//        for (int i = 0; i <3; i++) {
-//            buttonArray[1][i].setText("X");
-//        }
-//        gContainer.setCallingButton(buttonArray[1][1]);
-//
-//        assertTrue(gContainer.checkWin());
-//    }
-
-    //integration test
-//    @Test
-//    public void CheckIfCheckWinWorksAsDraw() throws Exception {
-//        gContainer.setPlayerOne("Player");
-//        buttonArray[1][1].setText("X");
-//        gContainer.setTurnCounter();
-//        gContainer.botTurn();
-//
-//        buttonArray[2][0].setText("X");
-//        gContainer.setTurnCounter();
-//        buttonArray[0][2].setText("O");
-//        gContainer.setTurnCounter();
-//
-//        buttonArray[0][1].setText("X");
-//        gContainer.setTurnCounter();
-//        buttonArray[2][1].setText("O");
-//        gContainer.setTurnCounter();
-//
-//        buttonArray[1][0].setText("X");
-//        gContainer.setTurnCounter();
-//        buttonArray[1][2].setText("O");
-//        gContainer.setTurnCounter();
-//
-//        buttonArray[2][2].setText("X");
-//        gContainer.setTurnCounter();
-//
-//        gContainer.setCallingButton(buttonArray[2][2]);
-//        assertTrue(gContainer.checkWin());
-//    }
 
     @Test
     public void checkIfResetFieldWorksAsPlayer() throws Exception {
@@ -191,23 +137,4 @@ public class GameContainerTest{
         assertThat(buttonArray[2][0].getText(),is("O"));
     }
 
-//    @Test
-//    public void mockingCheckWin(){
-//        String persistenceUnitName = gContainer.getPersistenceUnitName();
-//        for (int i = 0; i <3; i++) {
-//            buttonArray[i][i].setText("X");
-//        }
-//
-////        Mockito.doNothing().when(db).connect(persistenceUnitName);
-//
-////        Mockito.when(db.connect(persistenceUnitName)).thenReturn("First");
-//
-//        gContainer.setCallingButton(buttonArray[1][1]);
-//        gContainer.botTurn();
-//
-//        gContainer.checkWin();
-//        verify(db).connect(persistenceUnitName);
-////        assertTrue(gContainer.checkWin());
-////        Mockito.verify(db).connect(persistenceUnitName);
-//    }
 }

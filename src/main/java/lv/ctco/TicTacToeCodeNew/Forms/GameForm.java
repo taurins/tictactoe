@@ -1,6 +1,7 @@
 package lv.ctco.TicTacToeCodeNew.Forms;
 
 import lv.ctco.TicTacToeCodeNew.Buttons;
+import lv.ctco.TicTacToeCodeNew.DBConnection;
 import lv.ctco.TicTacToeCodeNew.GameContainer;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -17,9 +18,12 @@ public class GameForm extends JFrame {
     private Buttons[][] buttonArray = new Buttons[3][3];
     private JLabel[] labelArray = new JLabel[3];
     private GameContainer gContainer = new GameContainer(buttonArray, labelArray);
+    private DBConnection dbConnection = new DBConnection();
 
     public GameForm(String name){
         this.setTitle(name);
+        dbConnection.connect("playerEntity");
+        gContainer.setConnection(dbConnection);
     }
 
     public void setUp(){
@@ -109,6 +113,7 @@ public class GameForm extends JFrame {
             public void actionPerformed(ActionEvent e) {
 
                 HistoryForm historyform = new HistoryForm();
+                historyform.setDbConnection(gContainer.getConnection());
                 historyform.addWindowListener(new WindowListener() {
                     @Override
                     public void windowOpened(WindowEvent e) {
@@ -146,6 +151,7 @@ public class GameForm extends JFrame {
                     }
                 });
                 historyform.formSetup();
+
                 GameForm.super.setVisible(false);
 
             }
@@ -157,5 +163,13 @@ public class GameForm extends JFrame {
         sideStuff.add(buttonContainer);
 
         container.add(sideStuff);
+    }
+
+    public DBConnection getDbConnection() {
+        return dbConnection;
+    }
+
+    public void setDbConnection(DBConnection dbConnection) {
+        this.dbConnection = dbConnection;
     }
 }
